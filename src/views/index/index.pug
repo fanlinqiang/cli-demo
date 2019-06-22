@@ -1,0 +1,20 @@
+extends ../base
+block style
+block script
+block content
+    #page-wrapper(:controller="page")
+        .page-loading(:if="loading")
+            xmp(:widget="{$id:'loading', is:'ms-loading'}")
+        .page-content(:if="!loading")
+            .page-header
+                | test
+            .page-body
+                .content-none(:if="none || !dataList.length")
+                    xmp(:widget="{$id:'none', is:'ms-none'}")
+                .data-list-wrapper(:if="!none && dataList.length")
+                    .data-item(ms-for="item in dataList")
+                        span {{item.name}}
+                        span {{item.age}}
+            xmp(:widget="{$id:'alert', is:'ms-alert', show: error.showModal, info: error.info}")
+
+
