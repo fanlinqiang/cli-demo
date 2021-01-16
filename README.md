@@ -3,3 +3,6 @@
 ## 索引
 
 1. [avalon-ie8-cli](#avalon-ie8-cli)
+
+
+## Demo: avalon-ie8-cli ([source](https://github.com/fanlinqiang/cli-demo/tree/master/avalon-ie8-cli))
