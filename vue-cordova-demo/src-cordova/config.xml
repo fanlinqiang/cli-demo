@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- id: 配置好后会自动生成到android的package name 和ios 的bundle id， 也就是说我们不需要再从新根据平台从新指定 -->
+<!-- version： 是用来管理我们的版本号，在版本迭代的时候很重，配置好后，会自动动生成在项目里。-->
+<widget id="demo" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <!-- 项目名字决定了ios和android的工程名字 -->
+    <name>vue-cordova-demo</name>
+    <description>
+        A sample Apache Cordova application that responds to the deviceready event.
+    </description>
+    <author email="dev@cordova.apache.org" href="http://cordova.io">
+        Apache Cordova Team
+    </author>
+    <!-- this hook will point your config.xml to the DevServer on Serve -->
+    <hook type="after_prepare" src="../node_modules/vue-cli-plugin-cordova/serve-config-hook.js" />
+    <!-- src 指定了cordova需要默认启动哪个 文件 -->
+    <content src="index.html" />
+    <!-- cordova-plugin-whitelist -->
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <!-- preference：偏好设置，可针对不同平台进行个性化设置。 -->
+    <!-- stop uiwebview from bouncing in iOS 禁止webview回弹效果 -->
+    <preference name="webviewbounce" value="false" />
+    <preference name="UIWebViewBounce" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
+    <!-- 加载时间 -->
+    <preference name="loadUrlTimeoutValue" value="700000" />
+    <!-- prevent web storage backups 是否允许后台存储,建议配置none,否则的后ios会调用icloud存储，这个虽然没有大的影响，但是在发布到apple store的时候可能会因为这个原因，被拒绝掉。-->
+    <preference name="BackupWebStorage" value="none" />
+    <!-- allow keyboard trigger with focus events -->
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
+    <!-- 竖屏展示-->
+    <preference name="orientation" value="portrait" />
+    <!-- cordova-plugin-statusbar start-->
+    <!-- 默认为true）。在iOS上，在启动时使状态栏覆盖或不覆盖WebView。-->
+    <preference name="StatusBarOverlaysWebView" value="true" />
+    <!-- cordova-plugin-statusbar end-->
+    <platform name="android">
+        <allow-intent href="market:*" />
+        <!--Android的WebView默认不允许非https连接-->
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
+            <application android:usesCleartextTraffic="true" />
+        </edit-config>
+        <preference name="android-minSdkVersion" value="23" />
+        <preference name="android-targetSdkVersion" value="29" />
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+        <edit-config file="*-Info.plist" mode="add" target="ITSAppUsesNonExemptEncryption">
+            <false />
+        </edit-config>
+        <edit-config file="*-Info.plist" mode="add" target="NSAppTransportSecurity">
+            <dict>
+                <key>NSAllowsArbitraryLoads</key>
+                <true />
+                <key>NSAllowsArbitraryLoadsInWebContent</key>
+                <true />
+                <key>NSExceptionDomains</key>
+                <dict>
+                    <key>NSExceptionAllowsInsecureHTTPLoads</key>
+                    <true />
+                    <key>NSIncludesSubdomains</key>
+                    <true />
+                </dict>
+            </dict>
+        </edit-config>
+        <!-- cordova-plugin-wkwebview-engine start-->
+        <preference name="WKWebViewOnly" value="true" />
+        <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
+        <feature name="CDVWKWebViewEngine">
+            <param name="ios-package" value="CDVWKWebViewEngine" />
+        </feature>
+        <!-- cordova-plugin-wkwebview-engine end-->
+    </platform>
+</widget>
