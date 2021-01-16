@@ -10,6 +10,7 @@
 
 webpack4 + avalon 构建的适配IE8开发的cli
 
-## Demo：vue-cordova-demo ([source](https://github.com/fanlinqiang/cli-demo/tree/master/vue-cordova-demo))
+## Demo：
+ ([source](https://github.com/fanlinqiang/cli-demo/tree/master/vue-cordova-cli))
 
 使用vue-cli-plugin-cordova将Cordova集成到Vue Cli应用程序中

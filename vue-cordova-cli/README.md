@@ -24,28 +24,28 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
-# 使用vue-cli-plugin-cordova将Cordova集成到Vue Cli应用程序中
+### 使用vue-cli-plugin-cordova将Cordova集成到Vue Cli应用程序中
 
 > 使用详见[vue-cli-plugin-cordova](https://github.com/m0dch3n/vue-cli-plugin-cordova)
 
-# 版本
+### 版本
 ```
 cordova: 9.0.0 (cordova-lib@9.0.1)
 @vue/cli: 4.5.3
 vue: 2.6.11
 ```
-# 可能会用到的工具
+### 可能会用到的工具
 ```
 npm i -g ios-deploy --unsafe-perm=true
 ```
 
-# 相关链接
+### 相关链接
 
 * [cordova中文网](http://cordova.axuer.com/docs/zh-cn/latest/)
 
-# 修改 `vue.config.js`
+### 修改 `vue.config.js`
 
-## 添加配置调试配置
+#### 添加配置调试配置
 
 ```js
 module.exports ={
@@ -56,7 +56,7 @@ module.exports ={
 }
 ```
 
-## 添加h5打包模式
+#### 添加h5打包模式
 
 `package.json`中scripts中增加：
 ```json
@@ -87,33 +87,33 @@ module.exports = {
 ```
 
 
-# cordova常用插件
+### cordova常用插件
 
-## 白名单插件cordova-plugin-whitelist
+#### 白名单插件cordova-plugin-whitelist
 
 > 详见：https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-whitelist/
 
-## 获取设备信息插件cordova-plugin-device
+#### 获取设备信息插件cordova-plugin-device
 
 > 详见：https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-device/
 
-## 状态栏插件cordova-plugin-statusbar
+#### 状态栏插件cordova-plugin-statusbar
 
 > 详见：https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-statusbar/index.html
 
-## 读取应用程序的版本cordova-plugin-app-version
+#### 读取应用程序的版本cordova-plugin-app-version
 > 详见：https://github.com/sampart/cordova-plugin-app-version
 
-## 打开应用内浏览器窗口(或者系统默认浏览器)cordova-plugin-inappbrowser
+#### 打开应用内浏览器窗口(或者系统默认浏览器)cordova-plugin-inappbrowser
 > 详见：https://github.com/apache/cordova-plugin-inappbrowser
 
-## 控制应用程序的启动屏幕cordova-plugin-splashscreen
+#### 控制应用程序的启动屏幕cordova-plugin-splashscreen
 > 详见：https://github.com/apache/cordova-plugin-splashscreen
 
 可使用插件[cordova-res](https://github.com/ionic-team/cordova-res)快速生成icon及splash
 
 
-### 适配ihonex类型
+##### 适配ihonex类型
 
 #### iOS11 新增特性，Webkit 的一个 CSS 函数，用于设定安全区域与边界的距离，有四个预定义的变量：
 
@@ -151,18 +151,39 @@ body {
 }
 ```
 
-## 使用更快的WKWebView替代UIWebView cordova-plugin-wkwebview-engine
+#### 使用更快的WKWebView替代UIWebView cordova-plugin-wkwebview-engine
 
 > WKWebView 在性能方面比 UIWebview显著的快，且苹果从2020年4月开始不允许基于UIWebView的App提交，后续全部需要使用WKWebView详见： https://github.com/apache/cordova-plugin-wkwebview-engine#readme
 > WkWebview启动的index.html不能访问http/https请求，需要结合cordova-plugin-wkwebview-file-xhr，此插件是oracle开发，拦截所有wkwebview请求，利用原生的方式请求http/https（默认只拦截https，如果需要拦截http，需要config.xml中配置 <preference name="InterceptRemoteRequests" value="all" />）。
 还有，模拟器下的wkwebview是可以显示file://路径的本地图片文件的，但是真机下只能显示 Tmp 目录下的图片文件，所以如果你有下载、显示本地图片的，需要更换文件目录为 Tmp目录。
 > 注：Tmp 目录是 file:///var/mobile/Containers/Data/Applications/<GUID of app>/tmp/用 cordova.file.tempDirectory 常量可以得到这个目录
 
-## 点击物理回退按键时的响应cordova-plugin-backbutton
+#### 点击物理回退按键时的响应cordova-plugin-backbutton
 
 > 详见：https://github.com/mohamed-salah/phonegap-backbutton-plugin
 > 实例：https://blog.csdn.net/jiangxuexuanshuang/article/details/88684699
 
+### android 生成keystore和签名相关
+```
+// 生成 keystore,需谨记密钥口令，后续打包都需要用到
+keytool -genkey -v -keystore demo.keystore -alias demo.keystore -keyalg RSA -keysize 2048 -validity 36500
+
+// 签名
+参见 build_android_release.sh
+```
+#### 执行打包
+```
+cd src-cordova
+cordova platform rm android
+cordova platform add android
+./build_android_release.sh
+```
+
+apk加固：[https://jiagu.360.cn/#/app/android](https://jiagu.360.cn/#/app/android)
+
+> 可选推荐服务中仅选择支持X86平台即可
+
+加固后的apk需重新对齐签名，将加固后的apk放至src-cordova文件夹下，执行`resign_encrypted_apk.sh`
 
 ### 对一些插件的修改
 

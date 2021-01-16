@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!-- id: 配置好后会自动生成到android的package name 和ios 的bundle id， 也就是说我们不需要再从新根据平台从新指定 -->
 <!-- version： 是用来管理我们的版本号，在版本迭代的时候很重，配置好后，会自动动生成在项目里。-->
-<widget id="demo" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="demo.com" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <!-- 项目名字决定了ios和android的工程名字 -->
-    <name>vue-cordova-demo</name>
+    <name>Demo</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>
