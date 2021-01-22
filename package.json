@@ -1,0 +1,8 @@
+{
+    "scripts": {
+        "push": "node script/push.js"
+    },
+    "devDependencies": {
+        "simple-git": "^2.31.0"
+    }
+}
