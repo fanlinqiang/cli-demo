@@ -2,6 +2,8 @@ const baseUrl = process.env.NODE_ENV === 'production' ? '/demo-platform/' : '/'
 const url = 'https://www.cnblogs.com/fanlinqiang/'
 const cookie = ''
 module.exports = {
+    // 不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建。
+    productionSourceMap: false,
     // 静态资源路径
     publicPath: baseUrl,
     devServer: {
@@ -37,6 +39,7 @@ module.exports = {
             }, {})
         }
     },
+    // CSS 相关
     css: {
         loaderOptions: {
             // 给 sass-loader 传递选项
