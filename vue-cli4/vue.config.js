@@ -1,6 +1,6 @@
 const baseUrl = process.env.NODE_ENV === 'production' ? '/demo-platform/' : '/'
 const url = 'https://www.cnblogs.com/fanlinqiang/'
-const cookie = ''
+const cookie = process.env.VUE_APP_COOKIE // .env.development.local中定义VUE_APP_COOKIE=xxx
 module.exports = {
     // 不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建。
     productionSourceMap: false,
