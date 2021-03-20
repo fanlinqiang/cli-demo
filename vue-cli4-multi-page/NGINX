@@ -1,0 +1,56 @@
+# encoding=utf8
+# The project nginx config here
+# Some limitations:
+#   1. Fixed port mapping
+#       The nginx should expose three ports: 80, 8080 and 9090
+#       Port 80:    The online serving port
+#       Port 8080:  The online developing or debugging backend version (Will transparently route api requests to dev backends)
+#       Port 9090:  Reserved for further use
+#       The frontend configs for all these three virtual hosts are identical.
+#
+
+server {
+    listen      80 default_server;
+    root        /var/www/default;
+    index       index.html;
+
+    location / {
+        # try_files $uri $uri/ =404;
+        try_files $uri $uri/ /index.html;
+        # GZIP should be enabled to make response payload smaller
+        gzip            on;
+        gzip_types      text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+        if ($request_filename ~* .*\.(?:htm|html)$) {
+            add_header Last-Modified $date_gmt;
+            add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0";
+            expires off;
+        }
+        if ($request_filename ~* .*\.(?:js|css)$) {
+            expires 7d;
+        }
+        if ($request_filename ~* .*\.(?:jpg|jpeg|gif|ttf|png|ico|cur|gz|svg|svgz|mp4|ogg|ogv|webm)$) {
+            expires 7d;
+        }
+    }
+    location /phone {
+        # try_files $uri $uri/ =404;
+        try_files $uri $uri/ /phone.html;
+        # GZIP should be enabled to make response payload smaller
+        gzip            on;
+        gzip_types      text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+        if ($request_filename ~* .*\.(?:htm|html)$) {
+            add_header Last-Modified $date_gmt;
+            add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0";
+            expires off;
+        }
+        if ($request_filename ~* .*\.(?:js|css)$) {
+            expires 7d;
+        }
+        if ($request_filename ~* .*\.(?:jpg|jpeg|gif|ttf|png|ico|cur|gz|svg|svgz|mp4|ogg|ogv|webm)$) {
+            expires 7d;
+        }
+    }
+    location ~* /(pc|phone)/(css|img|js|flv|swf|download) {
+        rewrite (.*)\/(pc|phone)\/(.*) $1/$3 last;
+    }
+}

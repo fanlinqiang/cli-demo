@@ -1,0 +1,16 @@
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - cibuilder build
+  only:
+    - /^issue-[-a-zA-Z0-9]*$/
+    - /^feature-[-a-zA-Z0-9]*$/
+    - /^dev-[-a-zA-Z0-9]*$/
+    - /^hotfix-[-a-zA-Z0-9]*$/
+    - develop
+    - /^v\d+\.\d+\.\d+$/
+    - /^\d+\.\d+\.\d+$/
