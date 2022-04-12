@@ -3,6 +3,6 @@
         "push": "node script/push.js"
     },
     "devDependencies": {
-        "simple-git": "^2.31.0"
+        "simple-git": "^3.5.0"
     }
 }
